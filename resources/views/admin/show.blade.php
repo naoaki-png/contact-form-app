@@ -12,7 +12,7 @@
             <h2 class="text-center text-2xl font-serif text-amber-900 mb-6">お問い合わせ詳細</h2>
 
             @php
-                $genderLabels = [1 => '男性', 2 => '女性', 3 => 'その他'];
+$genderLabels = [1 => '男性', 2 => '女性', 3 => 'その他'];
             @endphp
 
             <!-- 詳細表示 -->
@@ -20,15 +20,23 @@
                 <div class="grid grid-cols-3 border-b border-gray-200">
                     <div class="bg-[#baa999] px-6 py-4 flex items-center">
                         <span class="text-sm font-medium text-white">お名前</span>
+                        @error('first_name', 'last_name')
+                            <div style="color: red; font-size: 0.85rem; margin-top: 5px;">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="col-span-2 bg-white px-6 py-4 flex items-center">
-                        <span class="text-[#6b5744]">{{ $contact->first_name }} {{ $contact->last_name }}</span>
+                        <span class="text-[#6b5744]">{{ $contact->first_name }} {{ $contact->last_name }}
+                        </span>
+
                     </div>
                 </div>
 
                 <div class="grid grid-cols-3 border-b border-gray-200">
                     <div class="bg-[#baa999] px-6 py-4 flex items-center">
                         <span class="text-sm font-medium text-white">性別</span>
+                        @error('gender')
+                            <div style="color: red; font-size: 0.85rem; margin-top: 5px;">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="col-span-2 bg-white px-6 py-4 flex items-center">
                         <span class="text-[#6b5744]">{{ $genderLabels[$contact->gender] ?? '' }}</span>
@@ -38,6 +46,9 @@
                 <div class="grid grid-cols-3 border-b border-gray-200">
                     <div class="bg-[#baa999] px-6 py-4 flex items-center">
                         <span class="text-sm font-medium text-white">メールアドレス</span>
+                        @error('email')
+                            <div style="color: red; font-size: 0.85rem; margin-top: 5px;">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="col-span-2 bg-white px-6 py-4 flex items-center">
                         <span class="text-[#6b5744]">{{ $contact->email }}</span>
@@ -47,6 +58,9 @@
                 <div class="grid grid-cols-3 border-b border-gray-200">
                     <div class="bg-[#baa999] px-6 py-4 flex items-center">
                         <span class="text-sm font-medium text-white">電話番号</span>
+                        @error('tel')
+                            <div style="color: red; font-size: 0.85rem; margin-top: 5px;">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="col-span-2 bg-white px-6 py-4 flex items-center">
                         <span class="text-[#6b5744]">{{ $contact->tel }}</span>
@@ -56,6 +70,9 @@
                 <div class="grid grid-cols-3 border-b border-gray-200">
                     <div class="bg-[#baa999] px-6 py-4 flex items-center">
                         <span class="text-sm font-medium text-white">住所</span>
+                        @error('address')
+                            <div style="color: red; font-size: 0.85rem; margin-top: 5px;">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="col-span-2 bg-white px-6 py-4 flex items-center">
                         <span class="text-[#6b5744]">{{ $contact->address }}</span>
@@ -76,6 +93,9 @@
                 <div class="grid grid-cols-3 border-b border-gray-200">
                     <div class="bg-[#baa999] px-6 py-4 flex items-center">
                         <span class="text-sm font-medium text-white">お問い合わせの種類</span>
+                        @error('category_id')
+                            <div style="color: red; font-size: 0.85rem; margin-top: 5px;">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="col-span-2 bg-white px-6 py-4 flex items-center">
                         <span class="text-[#6b5744]">{{ $contact->category->content ?? '' }}</span>
@@ -99,6 +119,9 @@
                     </div>
                     <div class="col-span-2 bg-white px-6 py-4 flex items-start">
                         <span class="text-[#6b5744] whitespace-pre-wrap">{{ $contact->detail }}</span>
+                        @error('detail')
+                            <div style="color: red; font-size: 0.85rem; margin-top: 5px;">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
             </div>

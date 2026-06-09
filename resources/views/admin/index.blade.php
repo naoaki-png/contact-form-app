@@ -40,6 +40,16 @@
                             @endforeach
                         </select>
                     </div>
+                    <div style="margin-top: 20px;">
+                        <label>タグ（複数選択可）</label>
+                        @foreach ($tags as $tag)
+                            <label style="display: block; margin-bottom: 5px;">
+                                <input type="checkbox" name="tag_ids[]" value="{{ $tag->id }}" {{ is_array(request('tag_ids')) && in_array($tag->id, request('tag_ids')) ? 'checked' : '' }}>
+                                {{ $tag->name }}
+                            </label>
+                        @endforeach
+                    </div>
+
                     <div class="min-w-[130px]">
                         <input type="date" name="date" value="{{ request('date') }}"
                             placeholder="年/月/日"
@@ -88,7 +98,7 @@
                                 <td class="px-6 py-4 text-sm text-gray-700">{{ $contact->first_name }} {{ $contact->last_name }}</td>
                                 <td class="px-6 py-4 text-sm text-gray-700">
                                     @php
-                                        $genderLabels = [1 => '男性', 2 => '女性', 3 => 'その他'];
+    $genderLabels = [1 => '男性', 2 => '女性', 3 => 'その他'];
                                     @endphp
                                     {{ $genderLabels[$contact->gender] ?? '' }}
                                 </td>
