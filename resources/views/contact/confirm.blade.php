@@ -25,7 +25,7 @@
                     <div class="col-span-2 bg-white px-6 py-4 flex items-center">
                         <span class="text-[#6b5744]">
                             @php
-                                $genderLabels = [1 => '男性', 2 => '女性', 3 => 'その他'];
+$genderLabels = [1 => '男性', 2 => '女性', 3 => 'その他'];
                             @endphp
                             {{ $genderLabels[$validated['gender']] ?? '' }}
                         </span>
