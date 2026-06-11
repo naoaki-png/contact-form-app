@@ -40,15 +40,6 @@
                             @endforeach
                         </select>
                     </div>
-                    <div style="margin-top: 20px;">
-                        <label>タグ（複数選択可）</label>
-                        @foreach ($tags as $tag)
-                            <label style="display: block; margin-bottom: 5px;">
-                                <input type="checkbox" name="tag_ids[]" value="{{ $tag->id }}" {{ is_array(request('tag_ids')) && in_array($tag->id, request('tag_ids')) ? 'checked' : '' }}>
-                                {{ $tag->name }}
-                            </label>
-                        @endforeach
-                    </div>
 
                     <div class="min-w-[130px]">
                         <input type="date" name="date" value="{{ request('date') }}"
