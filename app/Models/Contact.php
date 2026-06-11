@@ -22,4 +22,9 @@ class Contact extends Model
     {
         return $this->belongsToMany(Tag::class);
     }
+    public function category()
+    {
+        // belongsTo は「〜に属する」という意味です
+        return $this->belongsTo(Category::class);
+    }
 }
