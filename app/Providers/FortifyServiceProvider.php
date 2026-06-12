@@ -15,6 +15,10 @@ use Laravel\Fortify\Actions\RedirectIfTwoFactorAuthenticatable;
 use Laravel\Fortify\Fortify;
 use Laravel\Fortify\Contracts\RegisterResponse;
 use Laravel\Fortify\Contracts\LoginResponse;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
+
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -52,6 +56,18 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::loginView(function () {
             return view('auth.login');
         });
+
+        $this->app->bind(\Laravel\Fortify\Http\Requests\LoginRequest::class, function ($app) {
+            $request = $app->make(\Illuminate\Http\Request::class);
+            $request->validate([
+                'email' => 'required',
+                'password' => 'required',
+            ], [
+                'email.required' => 'メールアドレスを入力してください',
+                'password.required' => 'パスワードを入力してください',
+            ]);
+            return new \Laravel\Fortify\Http\Requests\LoginRequest();
+        });
         $this->app->instance(RegisterResponse::class, new class implements RegisterResponse {
             public function toResponse($request)
             {
@@ -66,6 +82,19 @@ class FortifyServiceProvider extends ServiceProvider
                 return redirect('/admin');
             }
         });
+        Fortify::authenticateUsing(function (Request $request) {
+            $user = User::where('email', $request->email)->first();
+
+            if ($user && Hash::check($request->password, $user->password)) {
+                return $user;
+            }
+            throw ValidationException::withMessages([
+                'email' => ['ログイン情報が登録されていません'], // 👈 c
+            ]);
+        });
+
+
+
 
     }
 }
