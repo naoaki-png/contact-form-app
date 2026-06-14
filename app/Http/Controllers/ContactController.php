@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreContactRequest;
-use Illuminate\Http\Request;
 use App\Models\Category;
-use App\Models\Tag;
 use App\Models\Contact;
+use App\Models\Tag;
+
 class ContactController extends Controller
 {
     public function index()
@@ -18,6 +18,7 @@ class ContactController extends Controller
 
         return view('contact.index', compact('categories', 'tags'));
     }
+
     public function confirm(StoreContactRequest $request)
     {
         $validated = $request->validated();
@@ -29,7 +30,6 @@ class ContactController extends Controller
 
         return view('contact.confirm', compact('validated', 'category', 'tags'));
     }
-
 
     public function store(StoreContactRequest $request)
     {

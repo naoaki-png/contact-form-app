@@ -14,7 +14,7 @@
                 お問い合わせありがとうございました
             </h2>
             <div class="flex justify-center">
-                <a href="/"
+                <a href="{{ route('home.index') }}"
                     class="px-8 py-3 bg-amber-900 text-white rounded-md hover:bg-amber-800 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 transition-colors uppercase tracking-wide">
                     HOME
                 </a>

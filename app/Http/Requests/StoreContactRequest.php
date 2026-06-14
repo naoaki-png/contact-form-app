@@ -14,11 +14,6 @@ class StoreContactRequest extends FormRequest
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         return [
@@ -35,6 +30,7 @@ class StoreContactRequest extends FormRequest
             'tag_ids.*' => ['integer', 'exists:tags,id'],
         ];
     }
+
     public function messages()
     {
         return [
@@ -48,9 +44,6 @@ class StoreContactRequest extends FormRequest
             'detail.required' => 'お問い合わせ内容を入力してください',
             'detail.max' => 'お問い合わせ内容は120文字以内で入力してください',
             'category_id.required' => 'お問い合わせの種類を選択してください',
-
-
-
         ];
     }
 }

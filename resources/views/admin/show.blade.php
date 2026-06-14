@@ -110,11 +110,11 @@ $genderLabels = [1 => '男性', 2 => '女性', 3 => 'その他'];
 
             <!-- アクションボタン -->
             <div class="flex justify-center gap-4 mt-8">
-                <a href="/admin"
+                <a href="{{ route('admin.index') }}"
                     class="px-8 py-3 bg-[#7d7470] hover:bg-[#6b5f57] border border-transparent rounded font-medium text-white transition">
                     一覧に戻る
                 </a>
-                <form action="/admin/contacts/{{ $contact->id }}" method="post">
+                <form action="{{ route('admin.destroy', $contact->id) }}" method="post">
                     @csrf
                     @method('DELETE')
                     <button type="submit"

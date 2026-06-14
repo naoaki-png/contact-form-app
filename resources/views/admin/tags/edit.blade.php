@@ -11,7 +11,7 @@
         <div class="max-w-xl mx-auto">
             <h2 class="text-center text-2xl font-serif text-amber-900 mb-6">タグ編集</h2>
 
-            <form action="/admin/tags/{{ $tag->id }}" method="post" class="bg-[#f9f6f2] rounded px-6 py-6">
+            <form action="{{route('tag.update', $tag->id) }}#tag-section" method="post" class="bg-[#f9f6f2] rounded px-6 py-6">
                 @csrf
                 @method('PUT')
                 <label class="block text-sm text-[#6b5744] mb-2" for="tag-name-input">タグ名</label>
@@ -21,7 +21,7 @@
                     <div class="mt-2 text-sm text-red-600">{{ $message }}</div>
                 @enderror
                 <div class="flex items-center gap-3 mt-4">
-                    <a href="/admin"
+                    <a href="{{ route('admin.index') }}#tag-section"
                         class="px-6 py-2 bg-[#e8ddd2] text-[#9a938c] rounded hover:bg-[#ddd2c7] inline-block">
                         戻る
                     </a>
