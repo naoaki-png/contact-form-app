@@ -7,20 +7,14 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
         $this->call([
             CategorySeeder::class,
             TagSeeder::class,
-        ]);
-        // \App\Models\User::factory(10)->create();
+            UserSeeder::class,
+            ContactSeeder::class,
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        ]);
     }
 }

@@ -1,82 +1,292 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
-
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
-
-## About Laravel
-
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
-
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-
 # COACHTECH お問い合わせフォーム
 
-Laravel Sail を使用して構築した、シンプルなお問い合わせフォームアプリです。
+## 目的
 
-## 💡 概要
+確認テストを通して、教材で学んだバックエンド技術（Laravel, DB設計, テスト）を実践的にアウトプットし、復習箇所を洗い出すこと
+
+## 概要
 
 本システムは、一般ユーザーが利用する公開のお問い合わせフォームです。
 誰でもお問い合わせを送信でき、管理者はログイン後にその内容を確認・管理します。
 
-## 🛠️ 主な機能
+## 主な機能
 
-- お問い合わせ入力フォーム（バリデーション機能付き）
-- 入力内容の確認・修正画面
-- 送信完了画面および自動返信メール機能
-- （※他にも機能があればここに箇条書きで追加）
+- 一般：お問い合わせ入力フォーム（バリデーション機能付き）
+- 一般：入力内容の確認・修正画面
+- 一般：送信完了画面
+- 管理：管理者ログイン機能（Fortifyによる認証）
+- 管理：お問い合わせ一覧・詳細表示機能（検索・ページネーション付き）
+- 管理：タグ追加・削除・編集機能
+- 管理：データのエクスポート機能（CSV出力）
+
+## ER図
+
+![ER図](image.png)
+
+## 環境構築手順
+
+このプロジェクトは、Laravel 10.x と Laravel Sail（Docker環境）を使用して構築されています。以下の手順に従って環境を構築してください。
+
+## 1. Laravelプロジェクトの作成 (Laravel 10.x)
+
+以下のDockerコマンドを実行して、Laravel 10.x を明示的に指定してプロジェクトを作成します。
+
+```bash
+docker run --rm \
+ -u "(id -u):(id -g)" \
+ -v "\$(pwd):/var/www/html" \
+ -w /var/www/html \
+ -e COMPOSER_CACHE_DIR=/tmp/composer_cache \
+ laravelsail/php82-composer:latest \
+ composer create-project laravel/laravel:^10.0 contact-form-app
+```
+
+## 2. Laravel Sailのインストール
+
+プロジェクト作成後、`contact-form-app` ディレクトリに移動し、Laravel Sailをインストールします。
+
+## 2-1. プロジェクトディレクトリへの移動とSailのインストール
+
+プロジェクトディレクトリに移動
+
+```bash
+cd contact-form-app
+```
+
+### Laravel Sailをインストール
+
+```bash
+docker run --rm \
+ -u "(id -u):(id -g)" \
+ -v "\$(pwd):/var/www/html" \
+ -w /var/www/html \
+ -e COMPOSER_CACHE_DIR=/tmp/composer_cache \
+ laravelsail/php82-composer:latest \
+ composer require laravel/sail --dev
+```
+
+## 2-2. Sail設定ファイルのパブリッシュ
+
+```bash
+docker run --rm \
+    -u "(id -u):(id -g)" \
+    -v "\$(pwd):/var/www/html" \
+    -w /var/www/html \
+    -e COMPOSER_CACHE_DIR=/tmp/composer_cache \
+    laravelsail/php82-composer:latest \
+    php artisan sail:install --with=mysql
+```
+
+### 💡 Apple Silicon（M1/M2/M3）Macをお使いの方へ
+
+Apple Silicon搭載のMacでは、`sail up -d` 実行時に `no matching manifest for linux/arm64/v8` というエラーが発生する場合があります。
+
+**解決方法:** `compose.yaml` を開き、`mysql` サービスに `platform: 'linux/amd64'` を追記してください。
+
+```yaml
+mysql:
+    image: "mysql/mysql-server:8.0"
+    platform: "linux/amd64" # ← この行を追加
+    ports:
+```
+
+---
+
+## 3. .env ファイルの設定
+
+`.env` ファイルを開き、データベース接続情報が以下と一致していることを確認・修正します。
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=mysql
+DB_PORT=3306
+DB_DATABASE=laravel
+DB_USERNAME=sail
+DB_PASSWORD=password
+```
+
+> [!IMPORTANT]
+> `DB_HOST` は `localhost` や `127.0.0.1` ではなく、Dockerコンテナ名である **`mysql`** を指定します。
+
+---
+
+## 4. phpMyAdminの追加
+
+`compose.yaml` を開き、`mysql` サービスの後に以下の `phpmyadmin` の設定を追加してください。
+
+```yaml
+phpmyadmin:
+    image: "phpmyadmin:latest"
+    ports:
+        - '\${FORWARD_PHPMYADMIN_PORT:-8080}:80'
+    environment:
+        PMA_HOST: mysql
+        PMA_USER: '\${DB_USERNAME}'
+        PMA_PASSWORD: '\${DB_PASSWORD}'
+    networks:
+        - sail
+    depends_on:
+        - mysql
+```
+
+---
+
+## 5. Sailの起動とエイリアス設定
+
+### 5-1. Sailをバックグラウンドで起動
+
+```bash
+./vendor/bin/sail up -d
+```
+
+### 5-2. エイリアスの設定（任意）
+
+毎回 `./vendor/bin/sail` と入力する手間を省くため、`sail` だけで実行できるようにエイリアスを設定します。
+
+**Zsh（Macのデフォルトなど）の場合:**
+
+```bash
+echo "alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'" >> ~/.zshrc
+exec \$SHELL
+```
+
+**Bashの場合:**
+
+```bash
+echo "alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'" >> ~/.bashrc
+exec \$SHELL
+```
+
+---
+
+## 6. アプリケーションキーの生成
+
+プロジェクトのルートディレクトリで以下のコマンドを実行し、アプリケーションキーを生成します。
+
+```bash
+sail artisan key:generate
+```
+
+---
+
+## 7. フロントエンドのセットアップ (Vite & Tailwind CSS)
+
+本プロジェクトでは、フロントエンドのスタイリングに Tailwind CSS を使用します。
+
+> [!IMPORTANT]
+> `sail npm` コマンドを実行する前に、**必ずSailコンテナが起動していること**を確認してください。
+
+### 7-1. パッケージのインストールと初期化
+
+```bash
+# 1. NPM依存パッケージのインストール
+sail npm install
+```
+
+# 2. Tailwind CSS と Alpine.js のインストール
+
+```bash
+sail npm install -D tailwindcss@^3.4.0 postcss autoprefixer
+sail npm install alpinejs
+```
+
+# 3. 設定ファイルの生成
+
+```bash
+sail npx tailwindcss init -p
+```
+
+### 7-2. Tailwind CSS のテンプレートパス設定
+
+`tailwind.config.js` を開き、`content` 部分を以下のように修正します。
+
+```javascript
+/** @type {import('tailwindcss').Config} */
+export default {
+    content: [
+        "./resources/**/*.blade.php",
+        "./resources/**/*.js",
+        "./resources/**/*.vue",
+    ],
+    theme: {
+        extend: {},
+    },
+    plugins: [],
+};
+```
+
+### 7-3. 提供リポジトリの resources ディレクトリと入れ替え
+
+以下の手順で、テンプレートとなる `resources` ディレクトリを差し替えます。
+
+1. 別の作業用ディレクトリ等で提供リポジトリをクローンします。
+    ```bash
+    git clone https://github.com/coachtech-prepared-file/Preparedblade-ConfirmationTest-ContactForm.git
+    ```
+2. Finderで現在のプロジェクトフォルダを開きます。
+    ```bash
+    open .
+    ```
+3. プロジェクト内にある既存の `resources` フォルダを削除します。
+4. クローンしたリポジトリ内にある `resources` フォルダを、プロジェクトの直下にコピーして配置します。
+
+> [!TIP]
+> コマンド操作に慣れている場合は `rm -rf` と `cp -r` でも可能ですが、誤削除を防ぐためFinderでの操作を推奨します。
+
+### 7-4. Vite開発サーバーの起動
+
+```bash
+sail npm run dev
+```
+
+> [!NOTE]
+> `sail npm run dev` は変更をリアルタイムに反映させるため、**実行したまま（ターミナルを開いたまま）**にしておく必要があります。
+
+---
+
+## 8. データベースのマイグレーションと初期データ投入
+
+最後に、以下のコマンドでデータベースのテーブルを作成し、初期（シード）データを投入します。
+
+```bash
+sail artisan migrate --seed
+```
+
+### 💡 データベースをリセットしたい場合
+
+開発中にデータを初期状態に戻したい場合は、以下のリセットコマンドを実行してください。
+
+```bash
+sail artisan migrate:fresh --seed
+```
+
+## 🛠️ 使用技術 (Tech Stack)
+
+本プロジェクトでは、以下の技術・環境を使用しています。
+
+### バックエンド (Backend)
+
+- **PHP**: 8.2
+- **Laravel**: 10.x
+- **Composer**: パッケージ管理ツール
+
+### フロントエンド (Frontend)
+
+- **Vite**: フロントエンドビルドツール
+- **Tailwind CSS**: ^3.4.0 (CSSフレームワーク)
+- **PostCSS / Autoprefixer**: CSS前処理・最適化
+- **Alpine.js**: 軽量JavaScriptフレームワーク
+
+### 開発環境 / インフラ (Development Environment)
+
+- **Docker / Laravel Sail**: 仮想開発環境の構築
+- **MySQL**: 8.0 (データベース)
+- **phpMyAdmin**: データベース管理ツール
+
+## 開発環境URL
+
+- http://localhost
+
+## 作成者
+
+- 杉本有聡

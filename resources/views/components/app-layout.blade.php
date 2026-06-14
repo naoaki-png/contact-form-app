@@ -25,7 +25,7 @@
                     <!-- 左側のスペース（ボタン幅に合わせて固定） -->
                 </div>
                 <div class="absolute left-1/2 transform -translate-x-1/2">
-                    <a class="text-2xl font-serif text-amber-900 hover:text-amber-800" href="/">
+                    <a class="text-2xl font-serif text-amber-900 hover:text-amber-800" href="{{ route('home.index') }}">
                         FashionablyLate
                     </a>
                 </div>
