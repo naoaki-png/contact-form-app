@@ -29,7 +29,7 @@ class TagController extends Controller
         $tag = Tag::findOrFail($id);
         $tag->delete();
 
-        return redirect()->route('admin.index')->with('message', 'タグを削除しました。');
+        return redirect()->route('admin.index')->withFragment('tag-section')->with('message', 'タグを削除しました。');
     }
 
     //
@@ -38,6 +38,6 @@ class TagController extends Controller
         $tag = Tag::findOrFail($id);
         $tag->update($request->validated());
 
-        return redirect()->route('admin.index')->with('message', 'タグを更新しました。');
+        return redirect()->route('admin.index')->withFragment('tag-section')->with('message', 'タグを削除しました。');
     }
 }

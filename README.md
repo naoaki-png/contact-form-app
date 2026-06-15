@@ -283,6 +283,33 @@ sail artisan migrate:fresh --seed
 - **MySQL**: 8.0 (データベース)
 - **phpMyAdmin**: データベース管理ツール
 
+## APIエンドポイント一覧
+
+HTTPメソッド:GET
+URI:/api/v1/contacts
+説明:お問い合わせ一覧（検索・ページネーション付き）
+認証:不要
+
+HTTPメソッド:GET
+URI:/api/v1/contacts/{contact}
+説明:お問い合わせ詳細（カテゴリ・タグ含む）
+認証:不要
+
+HTTPメソッド:POST
+URI:/api/v1/contacts
+説明:お問い合わせ新規作成
+認証:不要
+
+HTTPメソッド:PUT
+URI:/api/v1/contacts/{contact}
+説明:お問い合わせ更新
+認証:不要
+
+HTTPメソッド:DELETE
+URI:/api/v1/contacts/{contact}
+説明:お問い合わせ削除
+認証:不要
+
 ## 開発環境URL
 
 - http://localhost
