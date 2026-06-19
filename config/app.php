@@ -87,7 +87,7 @@ return [
     | to any of the locales which will be supported by the application.
     |
     */
-    'locale' => env('APP_LOCALE', 'ja'),
+    'locale' => 'ja',
 
     /*
     |--------------------------------------------------------------------------
@@ -100,7 +100,7 @@ return [
     |
     */
 
-    'fallback_locale' => 'en',
+    'fallback_locale' => 'ja_jp',
 
     /*
     |--------------------------------------------------------------------------
@@ -160,16 +160,16 @@ return [
     */
 
     'providers' => ServiceProvider::defaultProviders()->merge([
-        /*
-         * Package Service Providers...
-         */
+            /*
+             * Package Service Providers...
+             */
 
-        /*
-         * Application Service Providers...
-         */
+            /*
+             * Application Service Providers...
+             */
         AppServiceProvider::class,
         AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
+            // App\Providers\BroadcastServiceProvider::class,
         EventServiceProvider::class,
         RouteServiceProvider::class,
         FortifyServiceProvider::class,
